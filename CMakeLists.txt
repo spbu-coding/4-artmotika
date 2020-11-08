@@ -6,11 +6,4 @@ set(CMAKE_C_STANDARD 99)
 add_executable(converter src/main1.c)
 add_executable(comparer src/main2.c)
 
-if(MSVC)
-  target_compile_options(converter PRIVATE /W4 /WX)
-  target_compile_options(comparer PRIVATE /W4 /WX)
-else()
-  target_compile_options(converter PRIVATE -Wall -Wextra -pedantic -Werror)
-  target_compile_options(comparer PRIVATE -Wall -Wextra -pedantic -Werror)
-endif()
 
