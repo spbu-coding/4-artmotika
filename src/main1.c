@@ -24,7 +24,7 @@ int read_arguments( int argc, char* argv[], int* is_mine ){
 
     for (int j = 2; j < 4; ++j){
         int index_expansion = 0;
-        for (int i = 0; i < strlen(argv[j]); ++i){
+        for (long unsigned int i = 0; i < strlen(argv[j]); ++i){
             if (argv[j][i] == '.') index_expansion = i + 1;
         }
         if (index_expansion != 0) {
@@ -73,7 +73,7 @@ int make_their_bmp(){
             }
         }
     }else if (depth == 8){
-        for (int i = 0; i < bmp->Header.ColorsUsed; ++i){
+        for (unsigned int i = 0; i < bmp->Header.ColorsUsed; ++i){
             BMP_GetPaletteColor(bmp, i, &r, &g, &b);
             if (BMP_LAST_ERROR_CODE != BMP_OK)
                 return -3;
