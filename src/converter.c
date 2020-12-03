@@ -1,15 +1,14 @@
 #include "qdbmp.h"
-#include "my_library.c"
+#include "converter_library.c"
 #include <stdio.h>
 #include <string.h>
 
 #define error(...) (fprintf(stderr, __VA_ARGS__))
 
-BMP*	bmp;
 
 int read_arguments( int argc, char* argv[], int* is_mine ){
     if ( argc != 4 ){
-        error("Incorrect arguments");
+        error("Number of arguments should be 3");
         return -1;
     }
 
@@ -24,7 +23,7 @@ int read_arguments( int argc, char* argv[], int* is_mine ){
 
     for (int j = 2; j < 4; ++j){
         int index_expansion = 0;
-        for (long unsigned int i = 0; i < strlen(argv[j]); ++i){
+        for (int i = 0; i < strlen(argv[j]); ++i){
             if (argv[j][i] == '.') index_expansion = i + 1;
         }
         if (index_expansion != 0) {
@@ -48,8 +47,7 @@ int read_arguments( int argc, char* argv[], int* is_mine ){
     return 0;
 }
 
-int make_their_bmp(){
-
+int make_their_bmp(BMP*	bmp){
     UCHAR	r, g, b;
     UINT	width, height;
     USHORT depth;
@@ -73,7 +71,7 @@ int make_their_bmp(){
             }
         }
     }else if (depth == 8){
-        for (unsigned int i = 0; i < bmp->Header.ColorsUsed; ++i){
+        for (int i = 0; i < bmp->Header.ColorsUsed; ++i){
             BMP_GetPaletteColor(bmp, i, &r, &g, &b);
             if (BMP_LAST_ERROR_CODE != BMP_OK)
                 return -3;
@@ -101,6 +99,7 @@ int make_mine_bmp( char* argv[] ){
 }
 
 int main( int argc, char* argv[] ){
+    BMP*	bmp;
     /* Check arguments */
     int is_mine, return_make_bmp;
 
@@ -117,7 +116,7 @@ int main( int argc, char* argv[] ){
         bmp = BMP_ReadFile( argv[ 2 ] );
         if(BMP_LAST_ERROR_CODE != BMP_OK)
             return -3;
-        return_make_bmp = make_their_bmp();
+        return_make_bmp = make_their_bmp(bmp);
         BMP_WriteFile( bmp, argv[ 3 ] );
         if(BMP_LAST_ERROR_CODE != BMP_OK)
             return -3;

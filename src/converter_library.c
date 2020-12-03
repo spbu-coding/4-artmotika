@@ -6,7 +6,7 @@
 #define WRONG_FORMAT -1
 #define STRUCTURE_ERROR -2
 #define BMP_VERSION 40
-#define THE_FIRST_100_PIXELS 100
+#define NUMBER_OF_FIRST_PIXELS 100
 
 struct BMP_FILE {
     unsigned short type;
@@ -266,9 +266,9 @@ int compare_pixels(FILE *file1, FILE *file2, struct BMP_FILE *bmp_info, unsigned
                     fprintf(stderr,"%d %d\n", j, i);
                     count_of_pixels++;
                 }
-                if (count_of_pixels >= THE_FIRST_100_PIXELS) break;
+                if (count_of_pixels >= NUMBER_OF_FIRST_PIXELS) break;
             }
-            if (count_of_pixels >= THE_FIRST_100_PIXELS) break;
+            if (count_of_pixels >= NUMBER_OF_FIRST_PIXELS) break;
         }
     }else{
         char pixel1[3], pixel2[3];
@@ -290,9 +290,9 @@ int compare_pixels(FILE *file1, FILE *file2, struct BMP_FILE *bmp_info, unsigned
                     fprintf(stderr,"%d %d\n", j, i);
                     count_of_pixels++;
                 }
-                if (count_of_pixels >= THE_FIRST_100_PIXELS) break;
+                if (count_of_pixels >= NUMBER_OF_FIRST_PIXELS) break;
             }
-            if (count_of_pixels >= THE_FIRST_100_PIXELS) break;
+            if (count_of_pixels >= NUMBER_OF_FIRST_PIXELS) break;
         }
     }
     return 0;
