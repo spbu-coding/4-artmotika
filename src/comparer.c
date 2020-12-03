@@ -1,11 +1,9 @@
-#include "my_library.c"
+#include "converter_library.c"
 #include <stdio.h>
 
 #define error(...) (fprintf(stderr, __VA_ARGS__))
 
 int main( int argc, char* argv[] ){
-    if (argc > 2) return -1;
-
     FILE *file1, *file2;
 
     file1 = fopen(argv[1], "rb");
